@@ -1,0 +1,17 @@
+#countdown {
+    font: 20px/30px;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    text-align: left;
+    width: 380px;
+    color: #ffffff;
+}
+#future {
+    font: 20px/30px;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    text-align: left;
+    width: 380px;
+    color: #ffffff;
+}
+body {
+    background: #ffa36d;
+}
