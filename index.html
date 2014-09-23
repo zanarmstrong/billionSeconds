@@ -1,24 +1,39 @@
 <!doctype html>
-
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-
-  <title>Billion Second Birthday</title>
-
-  <link rel="stylesheet" href="css/billionSeconds.css">
-
-  <!--[if lt IE 9]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-</head>
-
-<body>
-  <div id="countdown"></div>
-  <br>
-  <div id="future"></div>
-  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-  <script src="js/birthdayObject.js"></script>
-  <script src="js/billionSeconds.js"></script>
-</body>
-</html>
+  <head>
+    <meta charset="utf-8">
+    <title>Billion Second Birthday</title>
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" href="meyerReset.css">
+      <link rel="stylesheet" href="billionSeconds.css">
+      <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+    </head>
+    <body>
+      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <symbol id="arrow" viewBox="0 0 100 150">
+      <polygon points="40,0 60,0 60,50 100,50 50,150 0,50 40,50" >
+      </symbol>
+      
+      </svg>
+      <section id="countdown">
+        <p>If you were born on <span id="billionSecondsAgo" class="highlight"></span>, you'd be <span class="highlight">a billion seconds old</span> right now.</p><a href="#yourBirthday">
+        <svg class="icon"><use xlink:href="#arrow" /></svg></a>
+      </section>
+      
+      <section id="yourBirthday">
+        <p>When were you born?</p>
+        <svg id="monthSelect"></svg>
+        <svg id="daySelect"></svg>
+        <svg id="yearSelect"></svg>
+        <div id="ageSeconds" class="info"></div>
+        <div id="billionSecondsBday" class="info"></div>
+        <div id="nextBillion" class="info"></div>
+      </section>
+      <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+      <!-- call JS files -->
+      <script src="birthdaySetup.js"></script>
+      <script src="billionSeconds.js"></script>
+    </body>
+  </html>
