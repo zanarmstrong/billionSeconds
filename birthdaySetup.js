@@ -1,10 +1,11 @@
+"use strict";
+
 /* the goal of this file is to create a type of object which will take in a date
    and output several manipulations of that date
 */
 
 // birthdate is number of milliseconds since Jan 1 1970
 function Birthday(birthdate) {
-	this.birthdate = birthdate;
 	this.trillion = 1000000000000;
 };
 
@@ -12,13 +13,18 @@ Birthday.prototype.getBirthdate = function() {
 	return this.birthdate;
 };
 
+Birthday.prototype.setBirthdate = function(birthdate) {
+	console.log(birthdate)
+	this.birthdate = birthdate;
+};
+
 // same as getBirthdate, but returns date object instead of milliseconds value
 Birthday.prototype.getBirthdateFormatted = function() {
-	return (new Date(this.birthdate));
+	return new Date(this.birthdate);
 };
 
 Birthday.prototype.ageInSeconds = function() {
-	return (Math.floor((Date.now() - this.birthdate) / 1000));
+	return Math.floor((Date.now() - this.birthdate) / 1000);
 };
 
 // for now I'm trusting that numbers like 1,2,3,4 are being passed
