@@ -43,7 +43,7 @@ var docWidth = document.body.clientWidth;
 function tick() {
 	var billionsecondsago = new Date(Date.now() - 1000000000000);
 	document.getElementById('billionSecondsAgo').innerHTML = formatDateTime(billionsecondsago);
-	//setTimeout(tick, 1000 - billionsecondsago % 1000);
+	setTimeout(tick, 1000 - billionsecondsago % 1000);
 };
 tick();
 
