@@ -63,20 +63,8 @@ d3.select('#monthSelect')
 		})
 		.attr("y", '15px')
 		.attr("class", "unselected")
-		.on("click", function(d, k) {
-			console.log(k)
-			yourBirthdayDate.month = k;
-			d3.select("#monthSelect")
-				.selectAll("text")
-				.attr("class", function(data, i) {
-					if (k == i) {
-						return "selected"
-					} else {
-						return "unselected"
-					}
-				})
-			updateBirthday();
-		})
+		.on("click", onSelectMonth)
+		.on("touchstart", onSelectMonth)
 
 // and day selector 
 d3.select('#daySelect')
@@ -92,19 +80,9 @@ d3.select('#daySelect')
 		})
 		.attr("y", '15px')
 		.attr("class", "unselected")
-		.on("click", function(d, k) {
-			yourBirthdayDate.day = k + 1;
-			d3.select("#daySelect")
-				.selectAll("text")
-				.attr("class", function(data, i) {
-					if (k == i) {
-						return "selected"
-					} else {
-						return "unselected"
-					}
-				})
-			updateBirthday();
-		})
+		.on("click", onSelectDay)
+		.on("touchstart", onSelectDay)
+
 
 // set up year selector
 
@@ -124,7 +102,6 @@ var brush = d3.svg.brush()
     .extent([startingValue, startingValue])
     .on("brush", brushed);
 
-console.log(sliderMargin, sliderWidth, sliderHeight)
 
 var svg = d3.select("#yearSelect").append("svg")
     .attr("width", sliderWidth + sliderMargin.left + sliderMargin.right)
@@ -141,13 +118,12 @@ svg.append("g")
     .call(d3.svg.axis()
       .scale(x)
       .orient("bottom")
-      .tickFormat(function(d) {console.log(d);
-       	return d; })
+      .tickFormat(function(d) {return d; })
       .tickSize(0)
       .tickPadding(12)
       .tickValues([1900, 2014]))
   .select(".domain")
-  .select(function() {console.log(this); return this.parentNode.appendChild(this.cloneNode(true)); })
+  .select(function() {return this.parentNode.appendChild(this.cloneNode(true)); })
     .attr("class", "halo");
 
 var slider = svg.append("g")
@@ -179,7 +155,6 @@ function brushed() {
   var value = brush.extent()[0];
 
   if (d3.event.sourceEvent) { // not a programmatic event
-  	console.log(d3.event.sourceEvent.type)
   	handle.attr("stroke", "white");
     value = x.invert(d3.mouse(this)[0]);
     brush.extent([value, value]);
@@ -189,12 +164,41 @@ function brushed() {
   handle.select('text').text(Math.floor(value))
   yourBirthdayDate.year = Math.floor(value);
 
-  if(d3.event.sourceEvent.type == 'mouseup'){
+  if(d3.event.sourceEvent.type == 'mouseup' || d3.event.sourceEvent.type == 'touchend'){
   		userUpdated = true;
   		updateBirthday();
   }
 
 }
+
+
+function onSelectDay(d, k) {
+			yourBirthdayDate.day = k + 1;
+			d3.select("#daySelect")
+				.selectAll("text")
+				.attr("class", function(data, i) {
+					if (k == i) {
+						return "selected"
+					} else {
+						return "unselected"
+					}
+				})
+			updateBirthday();
+}
+
+function onSelectMonth(d, k) {
+			yourBirthdayDate.month = k;
+			d3.select("#monthSelect")
+				.selectAll("text")
+				.attr("class", function(data, i) {
+					if (k == i) {
+						return "selected"
+					} else {
+						return "unselected"
+					}
+				})
+			updateBirthday();
+		}
 
 function updateBirthday() {
 	if(!!(yourBirthdayDate.month + 1) && !!(yourBirthdayDate.day) && userUpdated){
